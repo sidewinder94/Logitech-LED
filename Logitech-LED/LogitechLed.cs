@@ -1,8 +1,6 @@
-﻿using Logitech_LCD.Exceptions;
-using System;
-using Logitech_LED;
+﻿using System;
 
-namespace Logitech_LCD
+namespace Logitech_LED
 {
     /// <summary>
     /// The class to effectively use to access the SDK functions
