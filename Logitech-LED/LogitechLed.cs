@@ -24,8 +24,11 @@ namespace Logitech_LED
         #endregion
 
         #region constructor / destructor
+
         private LogitechLed()
-        { }
+        {
+            Init();
+        }
 
         ~LogitechLed()
         {
@@ -53,34 +56,75 @@ namespace Logitech_LED
 
         /// <summary>
         /// Allows the initialization of the SDK, MUST be called before any other function
+        /// Is called when the LogitechLed instance is created
         /// </summary>
         /// <returns>True if success, False if failed</returns>
         public bool Init()
         {
+            if (IsInit) return IsInit;//Skip if it is already initialized
             IsInit = NativeMethods.Init();
             return IsInit;
         }
 
-        ///// <summary>
-        ///// Refresh the screen
-        ///// </summary>
-        ///// <exception cref="LcdNotInitializedException">If the LCD Screen has not been initialized</exception>
-        //public void Update()
-        //{
-        //    InvokeMethod(new Action(NativeMethods.Update));
-        //}
 
-        ///// <summary>
-        ///// Displays a bitmap on a Monochrome screen
-        ///// </summary>
-        ///// <param name="monoBitmap">The array of bytes to display, a byte will be displayed if it's value is > 128 <see cref="MonoBitmap"/></param>
-        ///// <returns>True if succeeds false otherwise</returns>
-        ///// <exception cref="LcdNotInitializedException">If the LCD Screen has not been initialized</exception>
-        //public bool MonoSetBackground(byte[] monoBitmap)
-        //{
-        //    return (bool)InvokeMethod(new Func<byte[], bool>(NativeMethods.MonoSetBackground), monoBitmap);
-        //}
+        public bool SaveCurrentLighting()
+        {
+            return (bool)InvokeMethod(new Func<bool>(NativeMethods.SaveCurrentLighting));
+        }
 
+        public bool SetLighting(int redPercentage, int greenPercentage, int bluePercentage)
+        {
+            return (bool)InvokeMethod(new Func<int, int, int, bool>(NativeMethods.SetLighting), redPercentage, greenPercentage, bluePercentage);
+        }
 
+        public bool RestoreLighting()
+        {
+            return (bool)InvokeMethod(new Func<bool>(NativeMethods.RestoreLighting));
+        }
+
+        public bool FlashLighting(int redPercentage, int greenPercentage, int bluePercentage, int milliSecondsDuration,
+            int milliSecondsInterval)
+        {
+            return (bool)InvokeMethod(new Func<int, int, int, int, int, bool>(NativeMethods.FlashLighting), redPercentage, greenPercentage, bluePercentage, milliSecondsDuration, milliSecondsInterval);
+        }
+
+        public bool PulseLighting(int redPercentage, int greenPercentage, int bluePercentage, int milliSecondsDuration,
+            int milliSecondsInterval)
+        {
+            return (bool)InvokeMethod(new Func<int, int, int, int, int, bool>(NativeMethods.PulseLighting), redPercentage, greenPercentage, bluePercentage, milliSecondsDuration, milliSecondsInterval);
+        }
+
+        public bool StopEffects()
+        {
+            return (bool)InvokeMethod(new Func<bool>(NativeMethods.StopEffects));
+        }
+
+        public bool SetLightingFromBitmap(byte[] bitmap)
+        {
+            return (bool)InvokeMethod(new Func<byte[], bool>(NativeMethods.SetLightingFromBitmap), bitmap);
+        }
+
+        public bool SetLightingForKeyWithScanCode(int keyCode, int redPercentage, int greenPercentage,
+            int bluePercentage)
+        {
+            return (bool)InvokeMethod(new Func<int, int, int, int, bool>(NativeMethods.SetLightingForKeyWithScanCode), keyCode, redPercentage, greenPercentage, bluePercentage);
+        }
+
+        public bool SetLightingForKeyWithHidCode(int keyCode, int redPercentage, int greenPercentage, int bluePercentage)
+        {
+            return (bool)InvokeMethod(new Func<int, int, int, int, bool>(NativeMethods.SetLightingForKeyWithHidCode), keyCode, redPercentage, greenPercentage, bluePercentage);
+        }
+
+        public bool SetLightingForKeyWithQuartzCode(int keyCode, int redPercentage, int greenPercentage,
+            int bluePercentage)
+        {
+            return (bool)InvokeMethod(new Func<int, int, int, int, bool>(NativeMethods.SetLightingForKeyWithQuartzCode), keyCode, redPercentage, greenPercentage, bluePercentage);
+        }
+
+        public bool SetLightingForKeyWithKeyNameCode(KeyName keyCode, int redPercentage, int greenPercentage,
+            int bluePercentage)
+        {
+            return (bool)InvokeMethod(new Func<KeyName, int, int, int, bool>(NativeMethods.SetLightingForKeyWithKeyNameCode), keyCode, redPercentage, greenPercentage, bluePercentage);
+        }
     }
 }

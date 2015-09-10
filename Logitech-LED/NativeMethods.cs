@@ -2,6 +2,9 @@
 
 namespace Logitech_LED
 {
+    /// <summary>
+    /// Provide KeyCode Reference
+    /// </summary>
     public enum KeyName
     {
         Esc = 0x01,
@@ -110,6 +113,9 @@ namespace Logitech_LED
         NumPeriod = 0x53
     }
 
+    /// <summary>
+    /// Provides information on the allowed bitmap size
+    /// </summary>
     public enum BitmapSize
     {
         Width = 21,
@@ -118,7 +124,7 @@ namespace Logitech_LED
         Size = Width * Height * BytesPerKey
     }
 
-    public class NativeMethods
+    internal class NativeMethods
     {
         public const int LogiLedDurationInfinite = 0;
 
