@@ -1,4 +1,6 @@
-﻿using System.Runtime.InteropServices;
+﻿using System;
+using System.Runtime.InteropServices;
+using System.Runtime.Remoting.Messaging;
 
 namespace Logitech_LED
 {
@@ -126,33 +128,36 @@ namespace Logitech_LED
 
     internal class NativeMethods
     {
+        private const String BasePath = @"Lib\";
+        private const String DllName86 = @"Lib\x86\LogitechLedEnginesWrapper.dll";
+        private const String DllName64 = @"Lib\x64\LogitechLedEnginesWrapper.dll";
         public const int LogiLedDurationInfinite = 0;
 
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedInit")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedInit")]
         public static extern bool Init();
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSaveCurrentLighting")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSaveCurrentLighting")]
         public static extern bool SaveCurrentLighting();
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSetLighting")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSetLighting")]
         public static extern bool SetLighting(int redPercentage, int greenPercentage, int bluePercentage);
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedRestoreLighting")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedRestoreLighting")]
         public static extern bool RestoreLighting();
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedFlashLighting")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedFlashLighting")]
         public static extern bool FlashLighting(int redPercentage, int greenPercentage, int bluePercentage, int milliSecondsDuration, int milliSecondsInterval);
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedPulseLighting")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedPulseLighting")]
         public static extern bool PulseLighting(int redPercentage, int greenPercentage, int bluePercentage, int milliSecondsDuration, int milliSecondsInterval);
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedStopEffects")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedStopEffects")]
         public static extern bool StopEffects();
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSetLightingFromBitmap")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSetLightingFromBitmap")]
         public static extern bool SetLightingFromBitmap(byte[] bitmap);
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSetLightingForKeyWithScanCode")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSetLightingForKeyWithScanCode")]
         public static extern bool SetLightingForKeyWithScanCode(int keyCode, int redPercentage, int greenPercentage, int bluePercentage);
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSetLightingForKeyWithHidCode")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSetLightingForKeyWithHidCode")]
         public static extern bool SetLightingForKeyWithHidCode(int keyCode, int redPercentage, int greenPercentage, int bluePercentage);
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSetLightingForKeyWithQuartzCode")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSetLightingForKeyWithQuartzCode")]
         public static extern bool SetLightingForKeyWithQuartzCode(int keyCode, int redPercentage, int greenPercentage, int bluePercentage);
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSetLightingForKeyWithKeyNameCode")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedSetLightingForKeyWithKeyNameCode")]
         public static extern bool SetLightingForKeyWithKeyNameCode(KeyName keyCode, int redPercentage, int greenPercentage, int bluePercentage);
-        [DllImport("LogitechLedEnginesWrapper ", CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedShutdown")]
+        [DllImport(DllName86, CallingConvention = CallingConvention.Cdecl, EntryPoint = "LogiLedShutdown")]
         public static extern void Shutdown();
     }
 }
